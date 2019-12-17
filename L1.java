@@ -1,3 +1,10 @@
+//给定 nums = [2, 7, 11, 15], target = 9
+//        因为 nums[0] + nums[1] = 2 + 7 = 9
+//        所以返回 [0, 1]
+
+//1、暴力方法就不写了
+//2、根据题意A+B=TARGET ==》 A=TARTGET-B 也就是代码中的 target-nums[i]，如果有符合条件的，则说明配对成功
+
 import java.util.HashMap;
 import java.util.Map;
 
