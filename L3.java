@@ -19,7 +19,8 @@ public class L3 {
         HashMap<Character, Integer> hm = new HashMap<>();
         int max = 0;
         int result = 0;
-        for (int i = 0; i < s.length(); i++) {
+        int length = s.length();
+        for (int i = 0; i < length; i++) {
             if(hm.containsKey(s.charAt(i))) {
                 result = Math.max(hm.get(s.charAt(i)) + 1, result);
             }
