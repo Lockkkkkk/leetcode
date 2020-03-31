@@ -1,4 +1,4 @@
-import comm.util;
+import comm.ListNodeUtil;
 
 import java.util.*;
 public class Solution {
@@ -113,7 +113,6 @@ public class Solution {
                 }
             }
         }
-        
     }
 
     private static void exch(int[] array, int odd, int even) {
@@ -158,17 +157,79 @@ public class Solution {
         head.next = null;
         return pre;
     }
+//合并两个排序的链表
+    public static ListNode Merge(ListNode list1,ListNode list2) {
+        if(list1 == null && list2 == null ) return null;
+        if(list1 == null) return list2;
+        if(list2 == null) return list1;
+        ListNode list0 = null;
+        if(list1.val < list2.val){
+            list0 = list1;
+            list0.next = Merge(list1.next, list2);
+        }else{
+            list0 = list2;
+            list0.next = Merge(list1, list2.next);
+        }
+        return list0;
+    }
+
+
+
+    public static  class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+//    输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+    public static boolean HasSubtree(TreeNode root1,TreeNode root2) {
+        boolean result = false;
+        if(root1 != null & root2 != null ){
+            if(root1.val == root2.val){
+                result = doesTree1HaveTree2(root1, root2);
+            }
+            if(!result) {result = HasSubtree(root1.left, root2);}
+            if(!result) {result = HasSubtree(root1.right,root2);}
+        }
+        return result;
+    }
+    private static boolean doesTree1HaveTree2(TreeNode root1, TreeNode root2){
+        if(root1 == null && root2 !=null ) return false;
+        if(root2 == null) return true;
+        if(root1.val != root2.val) return false;
+        return doesTree1HaveTree2(root1.left, root2.left) && doesTree1HaveTree2(root1.right, root2.right);
+    }
+
+
+
 
     public static void main(String[] args) {
-        int[] nums = {2,3,1,0,2,5,3};
 
-        int a = findRepeatNumber(nums);
-//        System.out.println(a);
-//        System.out.println(numberOf1(5));
-//        System.out.println(numberOf1(10));
-//        System.out.println(numberOf1(-5));
-        int[] num = {1,2,3,4,5,6,7,8,9};
-        reOrderArray(num);
+        ListNode listnode = new ListNode(5);
+        listnode.next = new ListNode(10);
+        ListNode listnode1  = new ListNode(11);
+        listnode1.next = new ListNode(15);
+        ListNode list = Merge(listnode, listnode1);
+        while(list != null ){
+            System.out.println(list.val + "");
+            list = list.next;
+        }
+
+        TreeNode node1 = new TreeNode(5);
+        node1.left= new TreeNode(10);
+        node1.right = new TreeNode(15);
+        node1.left.left= new TreeNode(1);
+
+        TreeNode node2 = new TreeNode(10);
+        node2.left = new TreeNode(1);
+        boolean a = HasSubtree(node1, node2);
+        System.out.println(a);
+
+
     }
 
 }
