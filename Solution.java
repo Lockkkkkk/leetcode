@@ -262,6 +262,36 @@ public class Solution {
         }
     }
 
+    Stack<Integer> stack_data = new Stack<Integer>();
+    Stack<Integer> stack_min = new Stack<Integer>();
+    public void push(int node) {
+        stack_data.push(node);
+        if(stack_min.isEmpty() || stack_min.peek()>node){
+            stack_min.push(node);
+        }else{
+            stack_min.push(stack_min.peek());
+        }
+    }
+
+    public void pop() {
+        if(!stack_data.isEmpty()){
+            stack_data.pop();
+            stack_min.pop();
+        }
+    }
+
+    public int top() {
+        return stack_data.peek();
+    }
+
+    public int min() {
+        return stack_min.peek();
+    }
+
+
+
+
+
 
 
     public static void main(String[] args) {
