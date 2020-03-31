@@ -219,6 +219,51 @@ public class Solution {
 
 
 
+
+    public static ArrayList<Integer> printMatrix(int [][] matrix) {
+        if(matrix == null) return null;
+        ArrayList<Integer> list = new ArrayList<>();
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        if(rows <= 0 || cols <= 0) return null;
+        int start = 0;
+        while(cols > start * 2 && rows > start * 2){
+            printMatrixInCirle(list, matrix, cols, rows, start);
+            start++;
+        }
+        return list;
+
+    }
+
+    private static void printMatrixInCirle(ArrayList<Integer> list, int[][] matrix, int cols, int rows, int start){
+        int endX = cols - 1 - start;
+        int endY = rows - 1 - start;
+        // 从左到右
+        for (int i = start ; i <= endX ; i++) {
+            list.add(matrix[start][i]);
+        }
+        // 从上到下
+        if(start < endY){
+            for (int i = start + 1; i <= endY ; i++) {
+                list.add(matrix[i][endX]);
+            }
+        }
+        // 从右到左
+        if(start < endX && start < endY){
+            for (int i = endX - 1; i >= start ; i--) {
+                list.add(matrix[endY][i]);
+            }
+        }
+        // 从下到上
+        if(start < endX && start< endY - 1){
+            for (int i = endY - 1; i >= start + 1 ; i--) {
+                list.add(matrix[i][start]);
+            }
+        }
+    }
+
+
+
     public static void main(String[] args) {
 
         ListNode listnode = new ListNode(5);
@@ -240,6 +285,10 @@ public class Solution {
         node2.left = new TreeNode(1);
         boolean a = HasSubtree(node1, node2);
         System.out.println(a);
+
+        int [][] matrix = new int[][]{{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+        System.out.println(printMatrix(matrix));
+
 
 
     }
