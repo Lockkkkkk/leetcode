@@ -25,7 +25,7 @@ public class L3 {
                 result = Math.max(hm.get(s.charAt(i)) + 1, result);
             }
             max = Math.max(i- result +1, max);
-            hm.put(s.charAt(i),i);
+            hm.put(s.charAt(i), i);
         }
         return max;
     }

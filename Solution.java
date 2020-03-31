@@ -206,6 +206,18 @@ public class Solution {
 
 
 
+    // 二叉树镜像
+    public static void Mirror(TreeNode root){
+        if(root == null) return;
+        if(root.left == null && root.right == null) return;
+        TreeNode tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+        Mirror(root.left);
+        Mirror(root.right);
+    }
+
+
 
     public static void main(String[] args) {
 
